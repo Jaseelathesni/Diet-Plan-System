@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIET PLAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+
+        /* Header Styling */
+        header {
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background-color: #F1754F;
+            padding: 10px 5%;
+        }
+
+        .logo img {
+            width: 120px;
+            height: auto;
+        }
+
+        .categorysection {
+            display: flex;
+            gap: 20px;
+        }
+
+        .plancategory {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category {
+            background-color: #F1754F;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+            position: relative;
+            font-size: 14px;
+            font-family: 'Lucida Sans', 'Lucida Grande', sans-serif;
+        }
+
+        .details {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(232, 236, 237, 0.8);
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+
+        .category:hover .details {
+            display: block;
+        }
+
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .background-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: zoomBackground 10s infinite linear;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay h1 {
+            color: white;
+            font-size: 60px;
+            text-align: center;
+            padding: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        /* Zoom animation */
+        @keyframes zoomBackground {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.3);
+            }
+        }
+
+        /* Responsive text size */
+        @media (max-width: 768px) {
+            .overlay h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .overlay h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Heading Section */
+        .topst1 {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .topst {
+            font-size: 20px;
+            text-align: center;
+            font-family: 'Gill Sans', 'Trebuchet MS', sans-serif;
+            position: relative;
+            display: inline-block;
+            padding: 0 20px;
+        }
+
+        .topst::before,
+        .topst::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 50px;
+            height: 2px;
+            background-color: #8d8c8c;
+        }
+        
+        .topst::before {
+            left: -60px;
+        }
+
+        .topst::after {
+            right: -60px;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .categorysection {
+                flex-direction: column;
+                align-items: center;
+                margin-top: 10px;
+            }
+
+            .logo img {
+                width: 100px;
+            }
+
+            .topst {
+                font-size: 18px;
+            }
+
+            .topst::before,
+            .topst::after {
+                width: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .category {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            .topst {
+                font-size: 16px;
+            }
+
+            .topst::before,
+            .topst::after {
+                width: 20px;
+            }
+        }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                max-width: 1500px;
+                margin: 0 auto;
+                /* background-color: #F2F2F9; */
+            }
+            .row {
+                display: flex;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            .column {
+                flex: 1;
+                min-width: 250px; /* Minimum column width */
+                /* border: 1px solid rgb(185, 182, 182); */
+                border-radius: 10px;
+                padding: 20px;
+                text-align: center;
+            }
+            .column h2 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+
+            .column img {
+                width: 150px; /* Fixed width for a perfect circle */
+                height: 150px; /* Fixed height for a perfect circle */
+                border-radius: 50%; /* Circular shape */
+                margin-bottom: 10px;
+                object-fit: cover;
+                animation: rotate 5s linear infinite; /* Animation for 360 rotation */
+            }
+
+            @keyframes rotate {
+                from {
+                transform: rotate(0deg);
+                }
+                to {
+                transform: rotate(360deg);
+                }
+            }
+
+            .column p {
+                font-size: 1em;
+                color: rgb(106, 103, 103);
+                margin-top: 10px;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+
+            /* Media Queries */
+            @media (max-width: 1024px) {
+                .row {
+                flex-direction: column;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .row {
+                flex-direction: column;
+                gap: 15px;
+                }
+                .column {
+                padding: 15px;
+                }
+                .column h2 {
+                font-size: 1.3em;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .column {
+                padding: 10px;
+                }
+                .column h2 {
+                font-size: 1.2em;
+                }
+                .column p {
+                font-size: 0.9em;
+                }
+            }
+
+        .containercustom {
+            text-align: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            padding: 30px;
+            max-width: 1400px;
+            margin: auto;
+            background-color: #F2F2F9;
+        }
+
+        .containercustom h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: rgb(223, 85, 85);
+        }
+
+        .containercustom p {
+            font-size: 18px;
+            color: rgb(123, 121, 121);
+            margin-bottom: 40px;
+        }
+
+        .columnscustom {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .columncustom {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            padding: 10px;
+        }
+
+        .columncustom img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .columncustom h2 {
+            font-size: 20px;
+            color: rgb(208, 102, 102);
+            margin-bottom: 10px;
+        }
+
+        .columncustom p {
+            font-size: 16px;
+            color: rgb(123, 121, 121);
+            line-height: 1.6;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .columnscustom {
+                flex-direction: column;
+                align-items: center;
+            }
+            .columncustom {
+                max-width: 90%; /* Full width for mobile */
+            }
+        }
+
+        .body-container {
+            font-family: 'Trebuchet MS', Arial, sans-serif;
+            background-color: rgb(252, 252, 252);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header-container {
+            text-align: center;
+            margin-bottom : 20px;
+        }
+
+        .header-container h1 {
+            font-size: 2rem;
+            color: rgb(9, 89, 72);
+        }
+
+        /* Main Section */
+        main {
+            width: 90%;
+            max-width: 800px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Add Diet Form */
+        .add-diet {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .add-diet h2 {
+            font-size: 1.5rem;
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        .add-diet form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            width: 100%;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .form-group label {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            padding: 8px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+        }
+
+        .add-diet button {
+            background-color: rgb(57, 154, 57);
+            color: white;
+            font-size: 1rem;
+            padding: 10px 60px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .add-diet button:hover {
+            background-color: green;
+        }
+
+
+        /* Diet List */
+        #diet-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .diet {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+        }
+
+        .diet-info p {
+            font-size: 1rem;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-buttons button {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .update-btn {
+            background-color: #01090e;
+            color: #fff;
+        }
+
+        .update-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .delete-btn {
+            background-color: rgb(237, 64, 64);
+            color: white;
+            border-radius: 4px;
+        }
+
+        .delete-btn:hover {
+            background-color: red;
+            border: 1px solid black;
+        }
+
+        .update-diet button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #FFA500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Cancel Button */
+        #cancelButton {
+            background-color: #f44336;
+            margin-left: 10px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .diet {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .action-buttons {
+                align-self: flex-end;
+                margin-top: 10px;
+            }
+        }
+
+
+        .footer1 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Four equal columns for larger screens */
+            gap: 20px; /* Spacing between columns */
+            padding: 10px;
+            font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+            background-color: white;
+        }
+
+        .footer1 .colum1 h2, .footer1 .colum1 h4 {
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 10px;
+        }
+
+        .colum1 h4{
+            font-size: 20px;
+        }
+
+        .footer1 .colum1 p, .footer1 .colum1 a {
+            margin-bottom: 5px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .socialicons {
+            display: flex;
+            gap: 10px; 
+        }
+
+        .socialicons a {
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .footer1 {
+                grid-template-columns: repeat(2, 1fr); /* Two columns for medium screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer1 {
+                grid-template-columns: 1fr; /* Single column for small screens */
+                text-align: center;
+            }
+            
+            .footer1 .colum1 {
+                margin-bottom: 20px; /* Spacing between sections on small screens */
+            }
+            
+            .socialicons {
+                justify-content: center; /* Center icons on small screens */
+            }
+        }
+
+
+      
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="oralogo1.jpg" alt="eatthismuchlogo">  
+        </div>
+
+        <div class="categorysection">
+            <div class="plancategory">
+                <div class="category">
+                    <p>Diet Plan</p>
+                    <div class="details">
+                        <p>
+                            5:2 Diet<br>
+                            Atkins diet<br>
+                            Classic Bodybuilding<br>
+                            Flexible Dieting<br>
+                            Keto Diet<br>
+                            Low Fat<br>
+                            Protein-sparing Modified Fast<br>
+                            Zone Diet
+                        </p>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <p>Calculators</p>
+                    <div class="details">
+                        <p>
+                            Calorie Calculator<br>
+                            Body-Fat Calculators
+                        </p>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <p>Help</p>
+                </div>
+
+                <div class="category">
+                    <p>Articles</p>
+                </div>
+
+                <div class="category">
+                    <p>Signin</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="banner">
+        <img src="SLIDE_01.jpg" alt="Healthy Eating Background" class="background-image">
+        <div class="overlay">
+            <h1>Who says eating healthy is <br>boring?</h1><br>
+            <button style="background-color: rgb(240, 78, 78); color: white; width: 10%; height: 5%; cursor: pointer; border: none; border-radius: 50px;">Learn More!</button>
+        </div>
+    </div>
+
+    <div class="topst1">
+        <div class="topst">
+            WHAT DO YOU GET?
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- First Row with Two Columns -->
+        <div class="row">
+          <div class="column">
+            <h2>6 500 ready meals</h2>
+            <img src="round1.jpg" alt="Ready Meals">
+            <p>To save your time, our specialists create balanced meals that you can enjoy without restrictions. It will allow you to prepare nutrition plans for patients faster than ever. We will enable you to instantly generate fully personalized menus in accordance with a wide range of calorie goals, preferences and dietary restrictions.</p>
+          </div>
+          <div class="column">
+            <h2>1300 ready-made products</h2>
+            <img src="secondmeal.webp" alt="Ready Meals">
+            <p>You get full access to a rich product pool based on the nutrition table database for food products and dishes run by the Institute of Food and Nutrition..</p>
+          </div>
+        </div>
+      
+        <!-- Second Row with Three Columns -->
+        <div class="row">
+          <div class="column">
+            <h2>Search engine for dishes and products</h2>
+            <img src="fifthmeal.webp" alt="Ready Meals">
+            <p>A quick search for dishes and products using tags will make it easier to find a specific meal that is tailored to a given disease, food intolerance, time of day, preparation method or patient's preferences.</p>
+          </div>
+          <div class="column">
+            <h2>Personalized patient menus</h2>
+            <img src="thirdmeal.webp" alt="Ready Meals">
+            <p>Thanks to the rich food and product database, the program automatically generates balanced menus, taking into account the demand for nutritional standards. It also allows you to remove unwanted dishes and replacing them with others.</p>
+          </div>
+          <div class="column">
+            <h2>Kitchen and home measures</h2>
+            <img src="sixthmeal.webp" alt="Ready Meals">
+            <p>The patient does not need to have special kitchen scales to prepare meals. Our program is based on basic home measurements.</p>
+          </div>
+        </div>
+      </div>
+
+
+<!-- starting -->
+      <div class="body-container">
+        <div class="header-container">
+          <h1>HUNGRY YET?</h1>
+          <hr>
+        </div>
+      
+        <main>
+          <section class="add-diet">
+            <h2>Choose Your New Diet Plan</h2>
+            <form id="dietForm" onsubmit="event.preventDefault(); createDiet();">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="dietPlanName">Diet Plan Name:</label>
+                  <input type="text" id="dietPlanName" placeholder="e.g., Keto Diet" required>
+                </div>
+                <div class="form-group">
+                  <label for="mealType">Meal Type:</label>
+                  <input type="text" id="mealType" placeholder="e.g., Breakfast" required>
+                </div>
+                <div class="form-group">
+                  <label for="foodItems">Food Items:</label>
+                  <input type="text" id="foodItems" placeholder="e.g., Oatmeal, Banana" required>
+                </div>
+              </div>
+              <button type="submit">Add Diet</button>
+            </form>
+          </section>
+      
+          <!-- Update Diet Form (hidden by default) -->
+          <section class="update-diet" id="updateFormSection" style="display: none;">
+            <center><h2>Update Diet Plan</h2></center>
+            <form id="updateDietForm" onsubmit="updateDiet(event)">
+              <input type="hidden" id="updateDietId">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="updateDietPlanName">Diet Plan Name:</label>
+                  <input type="text" id="updateDietPlanName" required>
+                </div>
+                <div class="form-group">
+                  <label for="updateMealType">Meal Type:</label>
+                  <input type="text" id="updateMealType" required>
+                </div>
+                <div class="form-group">
+                  <label for="updateFoodItems">Food Items:</label>
+                  <input type="text" id="updateFoodItems" required>
+                </div>
+              </div>
+              <center>
+                <button type="submit">Update Diet</button>
+                <button type="button" onclick="cancelUpdate()" style="background-color: red;">Cancel</button>
+              </center>
+            </form>
+          </section>
+      
+          <section id="diet-list">
+            <!-- Diet plans will appear here -->
+          </section>
+        </main>
+      </div>
+<!-- ending -->
+
+
+      <div class="containercustom">
+        <h1>Custom Diet Plans For Your Needs</h1>
+        <p>Personalize the meal plan to meet your needs</p>
+    
+        <div class="columnscustom">
+            <div class="columncustom">
+                <img src="kilo.svg" alt="Custom Nutritional Targets">
+                <h2>Custom Nutritional Targets</h2>
+                <p>We take the hard work out of setting up your nutritional targets, but in some cases, you may want to make some adjustments. Once your diet is set up, you may edit the nutritional targets for each individual day. Adjust a huge amount of criteria from calories, protein, fats, carbohydrates, sugar, fiber, and much more.</p>
+            </div>
+            
+            <div class="columncustom">
+                <img src="dietry.svg" alt="Dietary Needs">
+                <h2>Dietary Needs</h2>
+                <p>Does your meal plan need to be Vegan, Gluten-free, Halal, or is it subject to any other form of dietary restriction? When setting up your meal plan, you can program the meal planner to only find foods suitable for your personal needs.</p>
+            </div>
+            
+            <div class="columncustom">
+                <img src="mealpref.svg" alt="Adjust Meal Preferences">
+                <h2>Adjust Meal Preferences</h2>
+                <p>Would you rather have your breakfast be a meal replacement drink because you don’t have much time in the morning? You can adapt our recipe finder settings to ensure that we find the most appropriate recipes.</p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer> 
+        <div class="footer1">
+            <!-- Column 1 -->
+            <div class="colum1">
+                <img src="whitelogo1.jpg" height="25%">
+                <p style="font-size: 15px;">About this</p>
+                <p style="font-size: 15px;">Our Team</p>
+                <div class="socialicons">
+                    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+    
+            <!-- Column 2 -->
+            <div class="colum1">
+                <h4 style="font-size: 20px;">Explore</h4>
+                <p>Home</p>
+                <p>Meal plans</p>
+            </div>
+    
+            <!-- Column 3 -->
+            <div class="colum1">
+                <h4 style="font-size: 20px;">Links</h4>
+                <p>About Us</p>
+                <p>Blog</p> 
+                <p>FAQ</p> 
+                <p>Testimonials</p> 
+                <p>Refund and Returns Policy</p> 
+                <p>Terms and Conditions</p> 
+                <p>Privacy Policy</p> 
+            </div>
+    
+            <!-- Column 4 -->
+            <div class="colum1">
+                <h4 style="font-size: 20px;">Contact Us</h4>
+                <p>Store Locator</p>
+                <p>Toll Free: 01252732223</p>
+                <p>WhatsApp: +91 8294995076</p>
+                <p>contactus@eatthismuch.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        // Function to create a new diet
+        async function createDiet() {
+            const dietplanname = document.getElementById('dietPlanName').value;
+            const mealtype = document.getElementById('mealType').value;
+            const fooditems = document.getElementById('foodItems').value;
+
+            const response = await fetch('http://localhost:4000/api/diet', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ dietplanname, mealtype, fooditems })
+            });
+
+            if (response.ok) {
+                document.getElementById('dietPlanName').value = '';
+                document.getElementById('mealType').value = '';
+                document.getElementById('foodItems').value = '';
+                fetchDiets(); // Refresh the diet list
+            } else {
+                console.error('Failed to create diet:', response.statusText);
+            }
+        }
+
+        // Function to fetch and display diets
+        async function fetchDiets() {
+            try {
+                const response = await fetch('http://localhost:4000/api/diet');
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch diets: ${response.statusText}`);
+                }
+            const diets = await response.json();
+            console.log("Diets fetched:", diets);
+            const container = document.getElementById('diet-list');
+            container.innerHTML = '';
+
+            diets.forEach(diet => {
+                const dietDiv = document.createElement('div');
+                dietDiv.className = 'diet';
+                dietDiv.innerHTML = `
+                    <p><strong>Plan Name:</strong> ${diet.dietplanname}</p>
+                    <p><strong>Meal Type:</strong> ${diet.mealtype}</p>
+                    <p><strong>Food Items:</strong> ${diet.fooditems}</p>
+                    <div class="action-buttons">
+                    <button class="update-btn" onclick="showUpdateForm('${diet._id}', '${diet.dietplanname}', '${diet.mealtype}', '${diet.fooditems}')">Update</button>
+                    <button class="delete-btn" onclick="deleteDiet('${diet._id}')">Delete</button>
+                    </div>
+                `;
+                container.appendChild(dietDiv);
+            });
+            } catch (error) {
+                console.error("Error fetching diets:", error);
+            }
+        }
+
+        // Function to show the Update Diet Form with pre-filled data
+        function showUpdateForm(id, name, mealType, foodItems) {
+            document.getElementById('updateDietId').value = id;
+            document.getElementById('updateDietPlanName').value = name;
+            document.getElementById('updateMealType').value = mealType;
+            document.getElementById('updateFoodItems').value = foodItems;
+            document.getElementById('updateFormSection').style.display = 'block';
+        }
+
+        // Function to update the diet
+        async function updateDiet(event) {
+            event.preventDefault();
+
+            const id = document.getElementById('updateDietId').value;
+            const dietplanname = document.getElementById('updateDietPlanName').value;
+            const mealtype = document.getElementById('updateMealType').value;
+            const fooditems = document.getElementById('updateFoodItems').value;
+
+            try {
+                const response = await fetch(`http://localhost:4000/api/diet/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify({ dietplanname, mealtype, fooditems })
+                });
+
+            if (response.ok) {
+                fetchDiets();
+                resetUpdateForm(); // Reset and hide the form
+            } else {
+                console.error('Failed to update diet:', response.statusText);
+            }
+            } catch (error) {
+                console.error('Error updating diet:', error);
+            }
+        }
+
+        // Function to delete a diet
+        async function deleteDiet(id) {
+            try {
+                const response = await fetch(`http://localhost:4000/api/diet/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    fetchDiets();
+                } else {
+                    console.error('Failed to delete diet:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error deleting diet:', error);
+            }
+        }
+
+        // Function to cancel the update and reset the form
+        function cancelUpdate() {
+            resetUpdateForm();
+        }
+
+        // Helper function to reset the form and hide the update section
+        function resetUpdateForm() {
+            document.getElementById('updateDietForm').reset();
+            document.getElementById('updateFormSection').style.display = 'none';
+        }
+
+        // Load diets on page load
+        document.addEventListener('DOMContentLoaded', fetchDiets);
+
+    </script>
+</body>
+</html>
